@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kenali Tambah: Sehari Ke Sekolah — Laman Web Pembelajaran Interaktif Tahun 1</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Quicksand & Nunito (Bulat, Comel & Mudah Dibaca Kanak-Kanak) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Quicksand:wght@600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================================
+       SISTEM REKA BENTUK & LATAR BELAKANG BERTEMA (RINGAN & MESRA DERIA)
+       ========================================================================= */
+    :root {
+      --bg-top: #cbeeff;
+      --bg-mid: #fff6d6;
+      --bg-bottom: #d4f4c8;
+      --glass-bg: rgba(255, 255, 255, 0.84);
+      --glass-border: rgba(255, 255, 255, 0.95);
+      --text-main: #1f2937;
+      --primary: #ff7a45;
+      --primary-shadow: #d9531e;
+      --secondary: #22c55e;
+      --secondary-shadow: #15803d;
+      --accent-blue: #3b82f6;
+      --accent-blue-shadow: #1d4ed8;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--text-main);
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 58%, var(--bg-bottom) 100%);
+      transition: background 0.65s ease, font-size 0.25s ease, letter-spacing 0.25s ease;
+    }
+
+    h1, h2, h3, .font-display {
+      font-family: 'Quicksand', 'Nunito', sans-serif;
+      letter-spacing: 0.01em;
+    }
+
+    /* Tema Latar Belakang Mengikut Langkah / Situasi */
+    body.theme-morning {
+      background: linear-gradient(180deg, #bae6fd 0%, #fef3c7 58%, #bbf7d0 100%);
+    }
+    body.theme-school-path {
+      background: linear-gradient(180deg, #a5f3fc 0%, #ecfccb 56%, #86efac 100%);
+    }
+    body.theme-classroom {
+      background: linear-gradient(180deg, #fef08a 0%, #e0f2fe 58%, #dbeafe 100%);
+    }
+    body.theme-canteen {
+      background: linear-gradient(180deg, #fed7aa 0%, #fef3c7 58%, #fde68a 100%);
+    }
+    body.theme-cooperative {
+      background: linear-gradient(180deg, #ccfbf1 0%, #e0f2fe 58%, #fef9c3 100%);
+    }
+    body.theme-afternoon {
+      background: linear-gradient(180deg, #fde68a 0%, #fed7aa 55%, #d9f99d 100%);
+    }
+    body.theme-home {
+      background: linear-gradient(180deg, #e0e7ff 0%, #ffedd5 58%, #fef3c7 100%);
+    }
+
+    /* Mod Kebolehcapaian: Jarak Teks Mesra Disleksia */
+    body.dyslexia-mode {
+      letter-spacing: 0.06em !important;
+      word-spacing: 0.16em !important;
+      line-height: 1.75 !important;
+    }
+
+    /* Mod Kebolehcapaian: Teks Besar */
+    body.large-text-mode {
+      font-size: 1.15rem;
+    }
+    body.large-text-mode .instruction-text {
+      font-size: 1.42rem !important;
+    }
+
+    /* Mod Kebolehcapaian: Kontras Tinggi */
+    body.high-contrast-mode {
+      background: #fffbeb !important;
+      color: #000000 !important;
+    }
+    body.high-contrast-mode .glass-board {
+      background: #ffffff !important;
+      border: 3px solid #111827 !important;
+      box-shadow: 0 8px 0 #111827 !important;
+    }
+    body.high-contrast-mode .text-gray-600,
+    body.high-contrast-mode .text-gray-700 {
+      color: #000000 !important;
+    }
+
+    /* Hiasan Latar Belakang CSS/SVG Ringan */
+    .thematic-decor-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .sun-disc {
+      position: absolute;
+      top: 4%;
+      right: 5%;
+      width: 96px;
+      height: 96px;
+      border-radius: 9999px;
+      background: radial-gradient(circle at 35% 35%, #fef9c3 0%, #fde047 65%, #fb923c 100%);
+      box-shadow: 0 0 45px rgba(250, 204, 21, 0.55);
+      animation: floatSlow 6s ease-in-out infinite;
+    }
+
+    .cloud-soft {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 9999px;
+      box-shadow: 0 8px 18px rgba(59, 130, 246, 0.08);
+    }
+    .cloud-a { top: 8%; left: -120px; width: 140px; height: 42px; animation: driftCloud 36s linear infinite; }
+    .cloud-b { top: 17%; left: -150px; width: 180px; height: 50px; animation: driftCloud 48s linear infinite 10s; }
+
+    .meadow-curve {
+      position: fixed;
+      bottom: -50px;
+      left: -10%;
+      width: 120%;
+      height: 150px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(187, 247, 208, 0.85) 0%, rgba(134, 239, 172, 0.65) 100%);
+      border-radius: 50% 50% 0 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes driftCloud {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(100vw + 300px)); }
+    }
+
+    /* Mod Tenang (Menghentikan pergerakan latar untuk keselesaan deria MBPK) */
+    body.calm-mode .sun-disc,
+    body.calm-mode .cloud-soft,
+    body.calm-mode .float-gentle {
+      animation: none !important;
+    }
+    body.calm-mode .thematic-decor-layer {
+      opacity: 0.4;
+    }
+
+    /* Papan Maklumat Frosted Glass */
+    .glass-board {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 2.5px solid var(--glass-border);
+      border-radius: 26px;
+      box-shadow: 0 14px 32px rgba(31, 41, 55, 0.09), inset 0 2px 3px rgba(255, 255, 255, 0.9);
+      position: relative;
+    }
+
+    /* Butang Bulat Tactile Mesra Kanak-Kanak */
+    .btn-cute {
+      font-family: 'Quicksand', 'Nunito', sans-serif;
+      border-radius: 9999px;
+      font-weight: 700;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      user-select: none;
+      cursor: pointer;
+    }
+    .btn-cute:hover:not(:disabled) {
+      transform: translateY(-2px);
+      filter: brightness(1.03);
+    }
+    .btn-cute:active:not(:disabled) {
+      transform: translateY(2px);
+    }
+    .btn-cute:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-orange {
+      background: linear-gradient(180deg, #ff9666 0%, #ff7a45 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 0 var(--primary-shadow), 0 8px 16px rgba(255, 122, 69, 0.25);
+    }
+    .btn-green {
+      background: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 0 var(--secondary-shadow), 0 8px 16px rgba(34, 197, 94, 0.22);
+    }
+    .btn-blue {
+      background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 0 var(--accent-blue-shadow), 0 8px 16px rgba(59, 130, 246, 0.22);
+    }
+    .btn-soft {
+      background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+      color: #374151;
+      border: 2px solid #e5e7eb;
+      box-shadow: 0 3px 0 #d1d5db;
+    }
+
+    /* Objek Boleh Dikira */
+    .countable-item {
+      transition: transform 0.22s ease, background-color 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .countable-item:hover {
+      transform: translateY(-3px) scale(1.06);
+    }
+    .countable-item.counted {
+      background: #fef08a !important;
+      border-color: #eab308 !important;
+      transform: scale(1.08);
+      box-shadow: 0 5px 12px rgba(234, 179, 8, 0.3);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.92); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop-in {
+      animation: popIn 0.32s ease-out forwards;
+    }
+
+
+    /* Gaya Iframe Responsif Mengikut Saiz Kad Laman Web */
+    .embed-box {
+      margin-top: 12px;
+      text-align: left;
+    }
+
+    .iframe-wrap {
+      position: relative;
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid #bfdbfe;
+      background: #ffffff;
+      box-sizing: border-box;
+      box-shadow: 0 4px 12px rgba(31, 41, 55, 0.06);
+    }
+
+    .iframe-padlet {
+      height: 460px;
+    }
+
+    .iframe-form {
+      height: 600px;
+    }
+
+    .iframe-jotform {
+      height: 620px;
+    }
+
+
+    .iframe-wrap .padlet-embed {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+    }
+
+    .iframe-wrap iframe {
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .iframe-padlet {
+        height: 390px;
+      }
+
+      .iframe-form,
+      .iframe-jotform {
+        height: 520px;
+      }
+    }
+
+    /* Bingkai Placeholder Dokumentasi */
+    .placeholder-frame {
+      border: 2.5px dashed #93c5fd;
+      background: linear-gradient(135deg, rgba(239, 246, 255, 0.78), rgba(254, 249, 195, 0.68));
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body class="theme-morning antialiased selection:bg-amber-200">
+
+  <!-- Hiasan Latar Belakang CSS/SVG Ringan -->
+  <div class="thematic-decor-layer" aria-hidden="true">
+    <div class="sun-disc"></div>
+    <div class="cloud-soft cloud-a"></div>
+    <div class="cloud-soft cloud-b"></div>
+  </div>
+  <div class="meadow-curve" aria-hidden="true"></div>
+
+  <!-- Bekas Utama Laman Web -->
+  <div class="relative z-10 max-w-5xl mx-auto px-3 sm:px-6 py-3 sm:py-5 min-h-screen flex flex-col justify-between">
+
+    <!-- BAR ATAS: Tajuk, Kawalan Audio, Muzik Ceria & Panel Bantuan -->
+    <header class="glass-board px-3 sm:px-5 py-2.5 mb-3 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5">
+        <span class="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-300 to-orange-400 flex items-center justify-center text-xl shadow-inner border border-white">
+          🎒
+        </span>
+        <div>
+          <p class="font-display font-bold text-sm sm:text-base text-gray-800 leading-tight">
+            Kenali Tambah: Sehari Ke Sekolah
+          </p>
+          <p id="step-indicator-text" class="text-xs font-extrabold text-orange-600">
+            Langkah 1 / 7
+          </p>
+        </div>
+      </div>
+
+      <!-- Butang Kawalan Pantas -->
+      <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+        <button onclick="speakCurrentStep()" class="btn-cute btn-blue px-3 py-1.5 text-xs sm:text-sm" title="Dengar bacaan arahan">
+          <span>🔊</span> <span>Audio</span>
+        </button>
+
+        <button onclick="toggleBackgroundMusic()" class="btn-cute btn-soft px-3 py-1.5 text-xs sm:text-sm" title="Muzik latar ceria">
+          <span id="music-icon">🎵</span> <span id="music-label">Muzik: Tutup</span>
+        </button>
+
+        <button onclick="toggleHelpDrawer()" class="btn-cute btn-green px-3 py-1.5 text-xs sm:text-sm" title="Alat Bantuan Murid Berkeperluan Khas">
+          <span>🧩</span> <span>Panel Bantuan</span>
+        </button>
+
+        <button onclick="openTeacherModal()" class="btn-cute btn-soft px-2.5 py-1.5 text-xs sm:text-sm" title="Info Guru dan Ibu Bapa">
+          <span>ℹ️</span> <span class="hidden sm:inline">Info Guru</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- BAR KEMAJUAN LANGKAH -->
+    <div class="w-full bg-white/75 h-3 rounded-full p-0.5 mb-3 shadow-inner border border-white">
+      <div id="progress-bar-fill" class="h-full rounded-full bg-gradient-to-r from-amber-400 via-orange-400 to-emerald-400 transition-all duration-500" style="width: 14.3%;"></div>
+    </div>
+
+    <!-- PANEL ALAT BANTUAN INKLUSIF (Boleh Dibuka Pada Bila-Bila Masa) -->
+    <section id="inclusive-help-panel" class="hidden glass-board p-4 mb-3 border-2 border-emerald-300 animate-pop-in">
+      <div class="flex items-center justify-between mb-2.5">
+        <h3 class="font-display font-bold text-base sm:text-lg text-emerald-800 flex items-center gap-2">
+          <span>🧩</span> Panel Bantuan Inklusif (Mesra Semua Murid & MBPK)
+        </h3>
+        <button onclick="toggleHelpDrawer()" class="text-xs font-bold px-2.5 py-1 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700">
+          Tutup ✕
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+        <button id="toggle-calm-btn" onclick="toggleAccessibilityOption('calm-mode', 'toggle-calm-btn')" class="btn-cute btn-soft p-2.5 text-xs flex-col text-center">
+          <span class="text-lg">🌿</span>
+          <span>Mod Tenang</span>
+        </button>
+
+        <button id="toggle-numberline-btn" onclick="toggleNumberLine()" class="btn-cute btn-soft p-2.5 text-xs flex-col text-center">
+          <span class="text-lg">📏</span>
+          <span>Garis Nombor</span>
+        </button>
+
+        <button id="toggle-dyslexia-btn" onclick="toggleAccessibilityOption('dyslexia-mode', 'toggle-dyslexia-btn')" class="btn-cute btn-soft p-2.5 text-xs flex-col text-center">
+          <span class="text-lg">🔤</span>
+          <span>Jarak Teks</span>
+        </button>
+
+        <button id="toggle-largetext-btn" onclick="toggleAccessibilityOption('large-text-mode', 'toggle-largetext-btn')" class="btn-cute btn-soft p-2.5 text-xs flex-col text-center">
+          <span class="text-lg">🔍</span>
+          <span>Teks Besar</span>
+        </button>
+
+        <button id="toggle-contrast-btn" onclick="toggleAccessibilityOption('high-contrast-mode', 'toggle-contrast-btn')" class="btn-cute btn-soft p-2.5 text-xs flex-col text-center col-span-2 sm:col-span-1">
+          <span class="text-lg">🌗</span>
+          <span>Kontras Tinggi</span>
+        </button>
+      </div>
+
+      <!-- Garis Nombor Visual Interaktif (0–10) -->
+      <div id="visual-number-line" class="hidden mt-3 pt-3 border-t border-emerald-200">
+        <p class="text-xs font-bold text-emerald-900 mb-1.5 text-center">
+          Garis Nombor Bantuan (0 hingga 10) — Klik nombor untuk membilang:
+        </p>
+        <div id="number-line-nodes" class="flex flex-wrap justify-center gap-1.5"></div>
+      </div>
+    </section>
+
+    <!-- KANDUNGAN UTAMA LANGKAH (7 LANGKAH PEMBELAJARAN) -->
+    <main id="step-container" class="flex-1 flex flex-col justify-center">
+      <!-- Dijana secara dinamik oleh JavaScript daripada WEBSITE_DATA -->
+    </main>
+
+    <!-- BAR NAVIGASI BAWAH TETAP (Sebelumnya di Kiri, Seterusnya di Kanan) -->
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <button id="btn-prev" onclick="prevStep()" class="btn-cute btn-soft px-5 py-3 text-sm sm:text-base">
+        <span>⬅️</span> <span>Sebelumnya</span>
+      </button>
+
+      <button id="btn-hint" onclick="showStepHint()" class="btn-cute btn-soft px-4 py-2.5 text-xs sm:text-sm text-amber-800 border-amber-300">
+        <span>💡</span> <span>Petunjuk</span>
+      </button>
+
+      <button id="btn-next" onclick="nextStep()" class="btn-cute btn-orange px-6 py-3 text-sm sm:text-base">
+        <span id="btn-next-label">Seterusnya</span> <span>➡️</span>
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- KOTAK MESEJ / PETUNJUK (Menggantikan alert()) -->
+  <div id="toast-box" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 hidden max-w-md w-[92%]">
+    <div class="glass-board px-5 py-3.5 border-2 border-amber-400 shadow-2xl flex items-center justify-between gap-3">
+      <p id="toast-message" class="font-bold text-sm sm:text-base text-gray-800"></p>
+      <button onclick="hideToast()" class="text-xs font-bold px-2.5 py-1 rounded-full bg-amber-200 text-amber-900">OK</button>
+    </div>
+  </div>
+
+  <!-- MODAL PANDUAN GURU / IBU BAPA -->
+  <div id="teacher-modal" class="fixed inset-0 bg-black/45 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="glass-board max-w-xl w-full p-6 max-h-[88vh] overflow-y-auto animate-pop-in">
+      <div class="flex items-center justify-between border-b border-gray-200 pb-3 mb-4">
+        <h2 class="font-display font-bold text-xl text-orange-700 flex items-center gap-2">
+          <span>📘</span> Info Guru & Ibu Bapa
+        </h2>
+        <button onclick="closeTeacherModal()" class="btn-cute btn-soft px-3 py-1 text-sm">Tutup ✕</button>
+      </div>
+
+      <div class="space-y-3 text-sm sm:text-base text-gray-700">
+        <div class="p-3 rounded-2xl bg-amber-50 border border-amber-200">
+          <p class="font-bold text-amber-900">Fokus Kurikulum (KSSR Matematik Tahun 1)</p>
+          <p><strong>Topik:</strong> Kenali Tambah (Operasi Asas Tambah dalam lingkungan 10).</p>
+          <p><strong>Objektif:</strong> Murid memahami tambah sebagai gabungan dua kumpulan, mengenal simbol <strong>+</strong> dan <strong>=</strong>, serta menyelesaikan ayat matematik tambah (termasuk tambah dengan sifar <strong>+ 0</strong>).</p>
+        </div>
+
+        <div class="p-3 rounded-2xl bg-emerald-50 border border-emerald-200">
+          <p class="font-bold text-emerald-900">Sokongan Murid Pelbagai Kebolehan & MBPK</p>
+          <ul class="list-disc pl-5 space-y-1 mt-1">
+            <li><strong>Ilustrasi Situasi Dahulu:</strong> Setiap senario memaparkan gambar suasana harian di bahagian atas supaya murid dapat membayangkan situasi sebelum mengira di bahagian bawah.</li>
+            <li><strong>Panel Bantuan Inklusif:</strong> Menyediakan <em>Audio Bacaan</em>, <em>Muzik Ceria</em>, <em>Mod Tenang</em>, <em>Garis Nombor (0–10)</em>, <em>Jarak Teks</em>, <em>Teks Besar</em>, dan <em>Kontras Tinggi</em>.</li>
+            <li><strong>Pentaksiran Formatif:</strong> Pra-Ujian dan Post-Ujian merekodkan perkembangan kefahaman murid secara automatik.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       1. KONFIGURASI PUSAT LAMAN WEB (WEBSITE_DATA)
+       Semua 8 fail imej dipautkan menggunakan nama relatif dalam folder sama.
+       ========================================================================= */
+    const WEBSITE_DATA = {
+      title: "Kenali Tambah: Sehari Ke Sekolah",
+      steps: [
+        {
+          stepNumber: 1,
+          type: "landing",
+          themeClass: "theme-morning",
+          phaseLabel: "Laman Utama",
+          title: "Kenali Tambah: Sehari Ke Sekolah",
+          instruction: "Jom belajar tambah bersama.",
+          hint: "Tekan butang Mula untuk memulakan perjalanan ke sekolah hari ini.",
+          audioUrl: "",
+          imageFile: "Morning School Send-Off.png",
+          imageAlt: "Budak lelaki bersalaman dengan ibu bapa sebelum ke sekolah pada waktu pagi"
+        },
+        {
+          stepNumber: 2,
+          type: "test",
+          testType: "pre",
+          themeClass: "theme-morning",
+          phaseLabel: "Pra-Ujian",
+          title: "Pra-Ujian: Semak Awal",
+          instruction: "Jawab tiga soalan awal sebelum kita bermula.",
+          hint: "Kira semua objek pada kedua-dua kumpulan, kemudian pilih jumlahnya.",
+          audioUrl: "",
+          questions: [
+            { id: "pre1", emojiA: "⚽", countA: 2, emojiB: "⚽", countB: 1, labelA: "2 bola", labelB: "1 bola", options: [2, 3, 4], answer: 3 },
+            { id: "pre2", emojiA: "🍎", countA: 3, emojiB: "🍎", countB: 2, labelA: "3 epal", labelB: "2 epal", options: [4, 5, 6], answer: 5 },
+            { id: "pre3", emojiA: "✏️", countA: 4, emojiB: "✏️", countB: 1, labelA: "4 pensel", labelB: "1 pensel", options: [3, 5, 6], answer: 5 }
+          ]
+        },
+        {
+          stepNumber: 3,
+          type: "infographic_explore",
+          themeClass: "theme-classroom",
+          phaseLabel: "Nota & Penerokaan",
+          title: "Nota Infografik & Penerokaan Tambah",
+          instruction: "Tambah bermaksud menggabungkan dua kumpulan. Klik objek untuk mengira dan tekan Gabungkan.",
+          hint: "Baca nota maksud simbol + dan = di atas, kemudian klik buah dan tekan Gabungkan.",
+          audioUrl: "",
+          infographicPoints: [
+            { badge: "Maksud Tambah", text: "Tambah bermaksud menggabungkan dua kumpulan.", visual: "🍊🍊  dan  🍊" },
+            { badge: "Simbol +", text: "Simbol + menunjukkan gabungan.", visual: "2  +  1" },
+            { badge: "Simbol =", text: "Simbol = menunjukkan jumlah keseluruhan.", visual: "2 + 1  =  3" },
+            { badge: "Contoh Penuh", text: "Gabungkan dua kumpulan dan kira semuanya.", visual: "🍊🍊 + 🍊 = 🍊🍊🍊 (3)" }
+          ],
+          exploration: {
+            groupA: { emoji: "🍓", count: 2, name: "Kumpulan Pertama (2)" },
+            groupB: { emoji: "🍓", count: 3, name: "Kumpulan Kedua (3)" }
+          }
+        },
+        {
+          stepNumber: 4,
+          type: "scenario_group",
+          phaseLabel: "Senario 1 – 4",
+          title: "Perjalanan Ke Sekolah & Aktiviti Di Sekolah",
+          hint: "Perhatikan gambar di atas dahulu, kemudian kira objek, tekan Gabungkan dan pilih jawapan di bawah.",
+          audioUrl: "",
+          scenarios: [
+            {
+              id: "s1",
+              number: 1,
+              themeClass: "theme-school-path",
+              title: "Senario 1: Dalam Perjalanan ke Sekolah",
+              imageFile: "1.jpg",
+              imageAlt: "Budak lelaki berjalan ke sekolah dengan 3 burung di dahan kiri dan 2 burung di dahan kanan",
+              instruction: "Kira dua kumpulan burung semasa ke sekolah. Berapa jumlahnya?",
+              groupA: { emoji: "🐦", count: 3, name: "Dahan kiri (3)" },
+              groupB: { emoji: "🐦", count: 2, name: "Dahan kanan (2)" },
+              options: [4, 5, 6],
+              answer: 5
+            },
+            {
+              id: "s2",
+              number: 2,
+              themeClass: "theme-classroom",
+              title: "Senario 2: Melihat Bilik Darjah",
+              imageFile: "2.jpg",
+              imageAlt: "Budak lelaki di bilik darjah dengan 4 beg sekolah di rak kiri dan 2 beg sekolah di atas meja kanan",
+              instruction: "Gabungkan dua kumpulan beg sekolah di bilik darjah. Berapa semuanya?",
+              groupA: { emoji: "🎒", count: 4, name: "Di rak kiri (4)" },
+              groupB: { emoji: "🎒", count: 2, name: "Di meja kanan (2)" },
+              options: [5, 6, 7],
+              answer: 6
+            },
+            {
+              id: "s3",
+              number: 3,
+              themeClass: "theme-classroom",
+              title: "Senario 3: Sedang Belajar",
+              imageFile: "3.jpg",
+              imageAlt: "Budak lelaki sedang belajar di meja dengan 3 pensel warna di kiri dan 4 pensel warna di kanan",
+              instruction: "Kira pensel warna satu per satu semasa belajar. Berapa jumlah keseluruhan?",
+              groupA: { emoji: "🖍️", count: 3, name: "Sebelah kiri (3)" },
+              groupB: { emoji: "🖍️", count: 4, name: "Sebelah kanan (4)" },
+              options: [6, 7, 8],
+              answer: 7
+            },
+            {
+              id: "s4",
+              number: 4,
+              themeClass: "theme-canteen",
+              title: "Senario 4: Sedang Membeli Makanan",
+              imageFile: "4.jpg",
+              imageAlt: "Budak lelaki di kantin sekolah dengan 2 pinggan karipap di kiri dan 3 pinggan donat di kanan",
+              instruction: "Tambah dua kumpulan makanan di kantin ini. Berapa jumlahnya?",
+              groupA: { emoji: "🥟", count: 2, name: "Pinggan karipap (2)" },
+              groupB: { emoji: "🍩", count: 3, name: "Pinggan donat (3)" },
+              options: [4, 5, 6],
+              answer: 5
+            }
+          ]
+        },
+        {
+          stepNumber: 5,
+          type: "scenario_group",
+          phaseLabel: "Senario 5 – 7",
+          title: "Di Koperasi, Pulang & Berada Di Rumah",
+          hint: "Lihat ilustrasi situasi di atas dahulu, kemudian kira, tekan Gabungkan dan pilih jawapan.",
+          audioUrl: "",
+          scenarios: [
+            {
+              id: "s5",
+              number: 5,
+              themeClass: "theme-cooperative",
+              title: "Senario 5: Berada di Koperasi Sekolah (Konsep + 0)",
+              imageFile: "5.jpg",
+              imageAlt: "Budak lelaki di koperasi sekolah dengan 4 buku latihan di kiri dan 1 dulang biru kosong (0) di kanan",
+              instruction: "Gabungkan buku di kiri dengan dulang kosong di kanan. Berapa semuanya?",
+              groupA: { emoji: "📒", count: 4, name: "4 buku latihan" },
+              groupB: { emoji: "📒", count: 0, name: "Dulang kosong (0)" },
+              options: [0, 4, 5],
+              answer: 4
+            },
+            {
+              id: "s6",
+              number: 6,
+              themeClass: "theme-afternoon",
+              title: "Senario 6: Dalam Perjalanan Pulang ke Rumah",
+              imageFile: "6.jpg",
+              imageAlt: "Budak lelaki berjalan pulang ke rumah dengan 3 bunga kuning di kiri dan 4 bunga merah di kanan",
+              instruction: "Kira dan gabungkan 3 bunga kuning dan 4 bunga merah semasa pulang. Berapa jumlahnya?",
+              groupA: { emoji: "🌼", count: 3, name: "Bunga kuning (3)" },
+              groupB: { emoji: "🌺", count: 4, name: "Bunga merah (4)" },
+              options: [6, 7, 8],
+              answer: 7
+            },
+            {
+              id: "s7",
+              number: 7,
+              themeClass: "theme-home",
+              title: "Senario 7: Berada di Rumah",
+              imageFile: "7.jpg",
+              imageAlt: "Budak lelaki duduk di ruang tamu rumah dengan 6 kereta mainan dalam bakul kiri dan 3 kereta mainan di tikar kanan",
+              instruction: "Kira semua kereta mainan di dalam bakul dan di atas tikar. Berapa jumlah keseluruhan?",
+              groupA: { emoji: "🚗", count: 6, name: "Dalam bakul (6)" },
+              groupB: { emoji: "🏎️", count: 3, name: "Di atas tikar (3)" },
+              options: [8, 9, 10],
+              answer: 9
+            }
+          ]
+        },
+        {
+          stepNumber: 6,
+          type: "test",
+          testType: "post",
+          themeClass: "theme-home",
+          phaseLabel: "Post-Ujian",
+          title: "Post-Ujian: Semak Kemajuan",
+          instruction: "Jawab tiga soalan akhir untuk lihat kemajuan kamu.",
+          hint: "Gabungkan kedua-dua kumpulan objek dan pilih jumlah yang tepat.",
+          audioUrl: "",
+          questions: [
+            { id: "post1", emojiA: "🥤", countA: 2, emojiB: "🥤", countB: 2, labelA: "2 cawan", labelB: "2 cawan", options: [3, 4, 5], answer: 4 },
+            { id: "post2", emojiA: "⭐", countA: 4, emojiB: "⭐", countB: 3, labelA: "4 bintang", labelB: "3 bintang", options: [6, 7, 8], answer: 7 },
+            { id: "post3", emojiA: "📘", countA: 5, emojiB: "📘", countB: 4, labelA: "5 buku", labelB: "4 buku", options: [8, 9, 10], answer: 9 }
+          ]
+        },
+        {
+          stepNumber: 7,
+          type: "summary",
+          themeClass: "theme-morning",
+          phaseLabel: "Rumusan & Refleksi",
+          title: "Rekod Markah, Refleksi & Perkongsian",
+          instruction: "Aktiviti selesai. Anda telah berlatih konsep tambah.",
+          hint: "Salin atau muat turun ringkasan skor untuk rekod pembelajaran anda.",
+          audioUrl: "",
+          extraFrames: [
+            {
+              id: "FRAME-PADLET",
+              assetType: "Padlet / Perkongsian",
+              title: "Ruang Perkongsian Rakan Pembelajaran",
+              label: "[FRAME: Ruang Padlet]"
+            },
+            {
+              id: "FRAME-REFLEKSI",
+              assetType: "Refleksi Tambahan",
+              title: "Ruang Refleksi Murid & Guru",
+              label: "[FRAME: Ruang Refleksi Tambahan]"
+            },
+            {
+              id: "FRAME-PENILAIAN",
+              assetType: "Borang & QR Penilaian",
+              title: "Instrumen Penilaian (15 Rakan Pembelajaran)",
+              label: "[FRAME: Borang / QR Penilaian 15 Rakan Pembelajaran]"
+            },
+            {
+              id: "FRAME-GAMBAR",
+              assetType: "Bukti Bergambar",
+              title: "Galeri Bukti Pelaksanaan",
+              label: "[FRAME: Bukti Bergambar]"
+            }
+          ]
+        }
+      ]
+    };
+
+    /* =========================================================================
+       2. KEADAAN APLIKASI (STATE)
+       ========================================================================= */
+    const state = {
+      currentStepIndex: 0,
+      preAnswers: {},
+      postAnswers: {},
+      activeScenarioTab: { 4: 0, 5: 0 }, // Indeks senario aktif dalam Langkah 4 dan Langkah 5
+      explorationMerged: false,
+      explorationCountedA: [],
+      explorationCountedB: [],
+      scenarioState: {}, // { s1: { merged: false, countedA: [], countedB: [], selected: null, correct: false } }
+      selectedReflection: "",
+      musicPlaying: false,
+      audioCtx: null,
+      musicTimer: null
+    };
+
+    /* =========================================================================
+       3. AUDIO BACAAN & MUZIK LATAR CERIA
+       ========================================================================= */
+    function speakText(text) {
+      try {
+        if (!("speechSynthesis" in window)) {
+          showToast("Pelayar ini tidak menyokong bacaan suara automatik.");
+          return;
+        }
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voices = window.speechSynthesis.getVoices();
+        const msVoice = voices.find(v => v.lang && (v.lang.includes("ms") || v.lang.includes("id")));
+        if (msVoice) utterance.voice = msVoice;
+        utterance.lang = "ms-MY";
+        utterance.rate = 0.92;
+        utterance.pitch = 1.06;
+        window.speechSynthesis.speak(utterance);
+      } catch (e) {}
+    }
+
+    function speakCurrentStep() {
+      const step = WEBSITE_DATA.steps[state.currentStepIndex];
+      let speech = `${step.title}. ${step.instruction || ""}`;
+      if (step.type === "scenario_group") {
+        const subIdx = state.activeScenarioTab[step.stepNumber] || 0;
+        const sc = step.scenarios[subIdx];
+        speech = `${sc.title}. ${sc.instruction}`;
+      }
+      speakText(speech);
+      playPopSound(523.25);
+    }
+
+    function playPopSound(freq = 587.33) {
+      try {
+        if (!state.audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          state.audioCtx = new AudioContext();
+        }
+        if (state.audioCtx.state === "suspended") state.audioCtx.resume();
+        const osc = state.audioCtx.createOscillator();
+        const gain = state.audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, state.audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.07, state.audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, state.audioCtx.currentTime + 0.17);
+        osc.connect(gain);
+        gain.connect(state.audioCtx.destination);
+        osc.start();
+        osc.stop(state.audioCtx.currentTime + 0.18);
+      } catch (e) {}
+    }
+
+    function playSuccessChime() {
+      playPopSound(523.25);
+      setTimeout(() => playPopSound(659.25), 110);
+      setTimeout(() => playPopSound(783.99), 220);
+    }
+
+    function toggleBackgroundMusic() {
+      const btnLabel = document.getElementById("music-label");
+      const btnIcon = document.getElementById("music-icon");
+
+      if (state.musicPlaying) {
+        state.musicPlaying = false;
+        clearInterval(state.musicTimer);
+        btnLabel.textContent = "Muzik: Tutup";
+        btnIcon.textContent = "🎵";
+        return;
+      }
+
+      try {
+        if (!state.audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          state.audioCtx = new AudioContext();
+        }
+        if (state.audioCtx.state === "suspended") state.audioCtx.resume();
+
+        state.musicPlaying = true;
+        btnLabel.textContent = "Muzik: Buka";
+        btnIcon.textContent = "🎶";
+
+        const melody = [523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25, 392.0];
+        let noteIdx = 0;
+
+        const playNote = () => {
+          if (!state.musicPlaying) return;
+          const isSpeaking = ("speechSynthesis" in window) && window.speechSynthesis.speaking;
+          const vol = isSpeaking ? 0.007 : 0.022;
+
+          const osc = state.audioCtx.createOscillator();
+          const gain = state.audioCtx.createGain();
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(melody[noteIdx % melody.length], state.audioCtx.currentTime);
+          gain.gain.setValueAtTime(vol, state.audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0008, state.audioCtx.currentTime + 0.4);
+          osc.connect(gain);
+          gain.connect(state.audioCtx.destination);
+          osc.start();
+          osc.stop(state.audioCtx.currentTime + 0.42);
+          noteIdx++;
+        };
+
+        playNote();
+        state.musicTimer = setInterval(playNote, 480);
+      } catch (e) {
+        showToast("Muzik tidak dapat dimainkan pada pelayar ini.");
+      }
+    }
+
+    /* =========================================================================
+       4. PANEL BANTUAN INKLUSIF & GARIS NOMBOR (0-10)
+       ========================================================================= */
+    function toggleHelpDrawer() {
+      document.getElementById("inclusive-help-panel").classList.toggle("hidden");
+      playPopSound(493.88);
+    }
+
+    function toggleAccessibilityOption(className, btnId) {
+      document.body.classList.toggle(className);
+      const btn = document.getElementById(btnId);
+      const active = document.body.classList.contains(className);
+      btn.classList.toggle("btn-green", active);
+      btn.classList.toggle("btn-soft", !active);
+      playPopSound(587.33);
+    }
+
+    function toggleNumberLine() {
+      const box = document.getElementById("visual-number-line");
+      const btn = document.getElementById("toggle-numberline-btn");
+      box.classList.toggle("hidden");
+      const active = !box.classList.contains("hidden");
+      btn.classList.toggle("btn-green", active);
+      btn.classList.toggle("btn-soft", !active);
+      playPopSound(587.33);
+    }
+
+    function buildNumberLine() {
+      const container = document.getElementById("number-line-nodes");
+      container.innerHTML = "";
+      for (let i = 0; i <= 10; i++) {
+        const node = document.createElement("button");
+        node.className = "w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border-2 border-emerald-400 font-display font-bold text-base text-emerald-900 hover:bg-amber-200 transition shadow-sm";
+        node.textContent = i;
+        node.onclick = () => {
+          document.querySelectorAll("#number-line-nodes button").forEach(b => b.classList.remove("bg-amber-300", "scale-110"));
+          node.classList.add("bg-amber-300", "scale-110");
+          playPopSound(330 + i * 35);
+          speakText(String(i));
+        };
+        container.appendChild(node);
+      }
+    }
+
+    /* =========================================================================
+       5. NOTIFIKASI TOAST, MODAL GURU & PEMBANTU IMEJ DENGAN FALLBACK
+       ========================================================================= */
+    let toastTimeout = null;
+    function showToast(msg) {
+      const box = document.getElementById("toast-box");
+      document.getElementById("toast-message").textContent = msg;
+      box.classList.remove("hidden");
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => box.classList.add("hidden"), 4200);
+    }
+    function hideToast() {
+      document.getElementById("toast-box").classList.add("hidden");
+    }
+
+    function openTeacherModal() {
+      const modal = document.getElementById("teacher-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+    function closeTeacherModal() {
+      const modal = document.getElementById("teacher-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function showStepHint() {
+      const step = WEBSITE_DATA.steps[state.currentStepIndex];
+      showToast("💡 Petunjuk: " + step.hint);
+      speakText(step.hint);
+    }
+
+    // Merender imej dengan onerror fallback yang kemas jika fail belum disalin ke folder sama
+    function renderResponsiveIllustration(filename, altText, maxHeightClass = "max-h-72 sm:max-h-80") {
+      const safeId = "img-fallback-" + filename.replace(/[^a-zA-Z0-9]/g, "");
+      return `
+        <div class="w-full flex flex-col items-center">
+          <img
+            src="${filename}"
+            alt="${altText}"
+            class="w-full ${maxHeightClass} object-contain rounded-2xl border-2 border-white shadow-md bg-white/60"
+            onerror="this.style.display='none'; document.getElementById('${safeId}').classList.remove('hidden');"
+          />
+          <div id="${safeId}" class="hidden w-full p-4 rounded-2xl border-2 border-dashed border-amber-400 bg-amber-50/90 text-center">
+            <p class="font-display font-bold text-sm text-amber-900">🖼️ Imej Belum Ditemui: <code class="bg-white px-2 py-0.5 rounded border border-amber-300">${filename}</code></p>
+            <p class="text-xs text-amber-800 mt-1">Sila letakkan fail <strong>${filename}</strong> di dalam folder yang sama dengan <strong>index.html</strong> untuk memaparkan ilustrasi ini.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function applyStepTheme(themeClass) {
+      document.body.classList.remove(
+        "theme-morning",
+        "theme-school-path",
+        "theme-classroom",
+        "theme-canteen",
+        "theme-cooperative",
+        "theme-afternoon",
+        "theme-home"
+      );
+      if (themeClass) document.body.classList.add(themeClass);
+    }
+
+    /* =========================================================================
+       6. RENDER SETIAP LANGKAH (7 LANGKAH)
+       ========================================================================= */
+    function renderCurrentStep() {
+      const step = WEBSITE_DATA.steps[state.currentStepIndex];
+      const container = document.getElementById("step-container");
+      const totalSteps = WEBSITE_DATA.steps.length;
+
+      document.getElementById("step-indicator-text").textContent = `Langkah ${step.stepNumber} / ${totalSteps} • ${step.phaseLabel}`;
+      document.getElementById("progress-bar-fill").style.width = `${(step.stepNumber / totalSteps) * 100}%`;
+
+      // Tetapkan tema latar belakang
+      if (step.type === "scenario_group") {
+        const activeIdx = state.activeScenarioTab[step.stepNumber] || 0;
+        applyStepTheme(step.scenarios[activeIdx].themeClass);
+      } else {
+        applyStepTheme(step.themeClass);
+      }
+
+      // Kawal butang navigasi bawah
+      const btnPrev = document.getElementById("btn-prev");
+      const btnNext = document.getElementById("btn-next");
+      const btnNextLabel = document.getElementById("btn-next-label");
+
+      btnPrev.disabled = state.currentStepIndex === 0;
+      if (state.currentStepIndex === totalSteps - 1) {
+        btnNext.classList.add("hidden");
+      } else {
+        btnNext.classList.remove("hidden");
+        btnNextLabel.textContent = step.type === "landing" ? "Mula" : "Seterusnya";
+      }
+
+      if (step.type === "landing") {
+        container.innerHTML = renderLandingStep(step);
+      } else if (step.type === "test") {
+        container.innerHTML = renderTestStep(step);
+      } else if (step.type === "infographic_explore") {
+        container.innerHTML = renderInfographicExploreStep(step);
+      } else if (step.type === "scenario_group") {
+        container.innerHTML = renderScenarioGroupStep(step);
+      } else if (step.type === "summary") {
+        container.innerHTML = renderSummaryStep(step);
+      }
+    }
+
+    /* --- LANGKAH 1: LAMAN UTAMA --- */
+    function renderLandingStep(step) {
+      return `
+        <div class="glass-board p-5 sm:p-7 text-center animate-pop-in">
+          <span class="inline-block px-4 py-1 rounded-full bg-amber-200 text-amber-900 font-bold text-xs sm:text-sm mb-3">
+            Matematik Tahun 1 • KSSR
+          </span>
+
+          <!-- Ilustrasi Utama di Atas -->
+          <div class="max-w-lg mx-auto mb-4">
+            ${renderResponsiveIllustration(step.imageFile, step.imageAlt, "max-h-64 sm:max-h-72")}
+          </div>
+
+          <h1 class="font-display font-bold text-2xl sm:text-4xl text-gray-800 mb-1.5">
+            ${step.title}
+          </h1>
+
+          <p class="instruction-text text-lg sm:text-xl font-extrabold text-orange-700 mb-5">
+            "${step.instruction}"
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-3">
+            <button onclick="nextStep()" class="btn-cute btn-orange px-8 py-3.5 text-lg sm:text-xl">
+              <span>🚀</span> <span>Mula</span>
+            </button>
+            <button onclick="openTeacherModal()" class="btn-cute btn-soft px-5 py-3.5 text-sm sm:text-base">
+              <span>📘</span> <span>Info Guru / Ibu Bapa</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    /* --- LANGKAH 2 & 6: PRA-UJIAN & POST-UJIAN --- */
+    function renderTestStep(step) {
+      const store = step.testType === "pre" ? state.preAnswers : state.postAnswers;
+      const answeredCount = Object.keys(store).length;
+
+      const questionsHTML = step.questions.map((q, idx) => {
+        const selectedVal = store[q.id];
+        const groupAIcons = Array(q.countA).fill(q.emojiA).join(" ");
+        const groupBIcons = Array(q.countB).fill(q.emojiB).join(" ");
+
+        return `
+          <div class="p-4 rounded-2xl bg-white/85 border-2 ${selectedVal !== undefined ? "border-emerald-400" : "border-amber-200"} shadow-sm">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="font-display font-bold text-sm px-3 py-0.5 rounded-full bg-amber-100 text-amber-900">
+                Soalan ${idx + 1}
+              </span>
+              <span class="text-xs font-bold text-gray-500">${q.labelA} + ${q.labelB}</span>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center gap-2.5 my-2 text-2xl sm:text-3xl bg-sky-50/85 py-2.5 px-3 rounded-xl">
+              <span>${groupAIcons}</span>
+              <span class="font-display font-bold text-orange-600">+</span>
+              <span>${groupBIcons}</span>
+              <span class="font-display font-bold text-blue-600">=</span>
+              <span class="font-display font-bold text-emerald-700">${selectedVal !== undefined ? selectedVal : "?"}</span>
+            </div>
+
+            <div class="flex justify-center gap-2.5 mt-3">
+              ${q.options.map(opt => {
+                const isSelected = selectedVal === opt;
+                return `
+                  <button
+                    onclick="selectTestAnswer('${step.testType}', '${q.id}', ${opt})"
+                    class="btn-cute ${isSelected ? "btn-green" : "btn-soft"} w-14 h-12 text-lg sm:text-xl font-bold"
+                  >
+                    ${opt}
+                  </button>
+                `;
+              }).join("")}
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      return `
+        <div class="glass-board p-5 sm:p-6 animate-pop-in">
+          <div class="text-center mb-4">
+            <h2 class="font-display font-bold text-xl sm:text-2xl text-gray-800">${step.title}</h2>
+            <p class="instruction-text text-base sm:text-lg font-bold text-orange-700 mt-1">${step.instruction}</p>
+            <p class="text-xs sm:text-sm font-semibold text-gray-600 mt-1">
+              Dijawab: ${answeredCount} / ${step.questions.length} soalan (Skor direkod secara automatik)
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            ${questionsHTML}
+          </div>
+        </div>
+      `;
+    }
+
+    function selectTestAnswer(testType, questionId, value) {
+      if (testType === "pre") {
+        state.preAnswers[questionId] = value;
+      } else {
+        state.postAnswers[questionId] = value;
+      }
+      playPopSound(659.25);
+      renderCurrentStep();
+    }
+
+    /* --- LANGKAH 3: NOTA INFOGRAFIK & AKTIVITI PENEROKAAN --- */
+    function renderInfographicExploreStep(step) {
+      const exp = step.exploration;
+      const total = exp.groupA.count + exp.groupB.count;
+
+      const renderItems = (groupKey, count, emoji, countedArr) => {
+        let html = "";
+        for (let i = 0; i < count; i++) {
+          const isCounted = countedArr.includes(i);
+          html += `
+            <button
+              onclick="toggleExplorationCount('${groupKey}', ${i})"
+              class="countable-item ${isCounted ? "counted" : ""} w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-white border-2 border-sky-200 flex flex-col items-center justify-center text-2xl shadow-sm p-1.5"
+            >
+              <span>${emoji}</span>
+              ${isCounted ? `<span class="text-[11px] font-extrabold text-amber-900 leading-none mt-0.5">${countedArr.indexOf(i) + 1}</span>` : ""}
+            </button>
+          `;
+        }
+        return html;
+      };
+
+      return `
+        <div class="glass-board p-5 sm:p-6 animate-pop-in space-y-5">
+          <div class="text-center">
+            <h2 class="font-display font-bold text-xl sm:text-2xl text-gray-800">${step.title}</h2>
+            <p class="instruction-text text-base sm:text-lg font-bold text-orange-700 mt-1">${step.instruction}</p>
+          </div>
+
+          <!-- Bahagian Atas: Nota Infografik Ringkas & Jelas -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+            ${step.infographicPoints.map(pt => `
+              <div class="p-3.5 rounded-2xl bg-white/90 border-2 border-amber-200 text-center shadow-sm">
+                <span class="inline-block px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 font-bold text-xs mb-1.5">
+                  ${pt.badge}
+                </span>
+                <p class="font-display font-bold text-lg text-gray-800 my-1">${pt.visual}</p>
+                <p class="text-xs sm:text-sm font-bold text-gray-700">${pt.text}</p>
+              </div>
+            `).join("")}
+          </div>
+
+          <!-- Bahagian Bawah: Aktiviti Penerokaan Kira & Gabungkan -->
+          <div class="p-4 sm:p-5 rounded-3xl bg-sky-50/90 border-2 border-sky-200">
+            <p class="font-display font-bold text-base sm:text-lg text-sky-950 text-center mb-3">
+              Cuba Sendiri: Klik objek untuk mengira, kemudian tekan <strong>Gabungkan</strong>
+            </p>
+
+            ${!state.explorationMerged ? `
+              <div class="grid grid-cols-1 sm:grid-cols-11 gap-2.5 items-center">
+                <div class="sm:col-span-5 p-3 rounded-2xl bg-white text-center border border-sky-200">
+                  <p class="text-xs font-bold text-sky-900 mb-2">${exp.groupA.name}</p>
+                  <div class="flex justify-center gap-2 flex-wrap">
+                    ${renderItems("A", exp.groupA.count, exp.groupA.emoji, state.explorationCountedA)}
+                  </div>
+                </div>
+
+                <div class="sm:col-span-1 text-center font-display font-bold text-3xl text-orange-500">+</div>
+
+                <div class="sm:col-span-5 p-3 rounded-2xl bg-white text-center border border-amber-200">
+                  <p class="text-xs font-bold text-amber-900 mb-2">${exp.groupB.name}</p>
+                  <div class="flex justify-center gap-2 flex-wrap">
+                    ${renderItems("B", exp.groupB.count, exp.groupB.emoji, state.explorationCountedB)}
+                  </div>
+                </div>
+              </div>
+            ` : `
+              <div class="p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-400 text-center animate-pop-in">
+                <p class="font-bold text-sm sm:text-base text-emerald-900 mb-2">
+                  Kedua-dua kumpulan digabungkan menjadi satu!
+                </p>
+                <div class="flex justify-center gap-2 flex-wrap my-2">
+                  ${Array(total).fill(0).map((_, idx) => `
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-yellow-100 border-2 border-amber-400 flex flex-col items-center justify-center text-2xl shadow-sm">
+                      <span>${exp.groupA.emoji}</span>
+                      <span class="text-xs font-extrabold text-amber-900">${idx + 1}</span>
+                    </div>
+                  `).join("")}
+                </div>
+                <p class="font-display font-bold text-2xl text-emerald-800 mt-1">
+                  ${exp.groupA.count} + ${exp.groupB.count} = ${total}
+                </p>
+              </div>
+            `}
+
+            <div class="flex flex-wrap justify-center gap-3 mt-4">
+              <button onclick="mergeExplorationGroups()" class="btn-cute btn-green px-6 py-2.5 text-sm sm:text-base" ${state.explorationMerged ? "disabled" : ""}>
+                <span>✨</span> <span>Gabungkan</span>
+              </button>
+              <button onclick="resetExploration()" class="btn-cute btn-soft px-5 py-2.5 text-sm sm:text-base">
+                <span>🔄</span> <span>Ulang Animasi</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleExplorationCount(groupKey, idx) {
+      const arr = groupKey === "A" ? state.explorationCountedA : state.explorationCountedB;
+      if (!arr.includes(idx)) {
+        arr.push(idx);
+        playPopSound(440 + arr.length * 55);
+        speakText(String(arr.length));
+      }
+      renderCurrentStep();
+    }
+
+    function mergeExplorationGroups() {
+      state.explorationMerged = true;
+      playSuccessChime();
+      speakText("Kedua-dua kumpulan digabungkan menjadi satu. Jumlah keseluruhan ialah 5.");
+      renderCurrentStep();
+    }
+
+    function resetExploration() {
+      state.explorationMerged = false;
+      state.explorationCountedA = [];
+      state.explorationCountedB = [];
+      playPopSound(440);
+      renderCurrentStep();
+    }
+
+    /* --- LANGKAH 4 & 5: SENARIO HARIAN (ILUSTRASI DI ATAS, PENGIRAAN DI BAWAH) --- */
+    function getScenarioState(scId) {
+      if (!state.scenarioState[scId]) {
+        state.scenarioState[scId] = {
+          merged: false,
+          countedA: [],
+          countedB: [],
+          selected: null,
+          correct: false
+        };
+      }
+      return state.scenarioState[scId];
+    }
+
+    function renderScenarioGroupStep(step) {
+      const activeIdx = state.activeScenarioTab[step.stepNumber] || 0;
+      const sc = step.scenarios[activeIdx];
+      const sState = getScenarioState(sc.id);
+      const total = sc.groupA.count + sc.groupB.count;
+
+      const renderGroupObjects = (groupKey, groupObj, countedArr) => {
+        if (groupObj.count === 0) {
+          return `
+            <div class="py-3 px-4 rounded-2xl bg-white/80 border-2 border-dashed border-gray-300 text-gray-600 font-bold text-sm">
+              0 (Tiada barang / Kosong)
+            </div>
+          `;
+        }
+        let html = "";
+        for (let i = 0; i < groupObj.count; i++) {
+          const isCounted = countedArr.includes(i);
+          html += `
+            <button
+              onclick="countScenarioObj('${sc.id}', '${groupKey}', ${i})"
+              class="countable-item ${isCounted ? "counted" : ""} w-12 h-12 sm:w-13 sm:h-13 rounded-2xl bg-white border-2 border-amber-200 flex flex-col items-center justify-center text-xl sm:text-2xl shadow-sm p-1"
+            >
+              <span>${groupObj.emoji}</span>
+              ${isCounted ? `<span class="text-[10px] font-extrabold text-amber-900 leading-none">${countedArr.indexOf(i) + 1}</span>` : ""}
+            </button>
+          `;
+        }
+        return html;
+      };
+
+      return `
+        <div class="glass-board p-4 sm:p-6 animate-pop-in space-y-4">
+          <!-- Tab Pemilihan Senario Dalam Langkah Ini -->
+          <div class="flex flex-wrap items-center justify-center gap-2">
+            ${step.scenarios.map((item, idx) => {
+              const itemDone = getScenarioState(item.id).correct;
+              const isCurrent = idx === activeIdx;
+              return `
+                <button
+                  onclick="switchScenarioTab(${step.stepNumber}, ${idx})"
+                  class="btn-cute ${isCurrent ? "btn-orange" : (itemDone ? "btn-green" : "btn-soft")} px-3.5 py-1.5 text-xs sm:text-sm"
+                >
+                  <span>${itemDone ? "✅" : "📍"}</span>
+                  <span>Senario ${item.number}</span>
+                </button>
+              `;
+            }).join("")}
+          </div>
+
+          <!-- Tajuk Senario -->
+          <div class="text-center">
+            <h2 class="font-display font-bold text-xl sm:text-2xl text-gray-800">${sc.title}</h2>
+          </div>
+
+          <!-- BAHAGIAN ATAS: ILUSTRASI SITUASI SUPAYA MURID MEMBAYANGKAN SUASANA DAHULU -->
+          <div class="max-w-xl mx-auto">
+            ${renderResponsiveIllustration(sc.imageFile, sc.imageAlt, "max-h-64 sm:max-h-72")}
+          </div>
+
+          <!-- BAHAGIAN BAWAH: SOALAN, AKTIVITI GABUNG & PENGIRAAN -->
+          <div class="p-4 sm:p-5 rounded-3xl bg-white/85 border-2 border-amber-200 shadow-sm space-y-3">
+            <p class="instruction-text text-base sm:text-lg font-extrabold text-orange-700 text-center">
+              ${sc.instruction}
+            </p>
+
+            ${!sState.merged ? `
+              <!-- Langkah 1: Kira & Gabungkan Dua Kumpulan -->
+              <div class="grid grid-cols-1 sm:grid-cols-11 gap-2.5 items-center">
+                <div class="sm:col-span-5 p-3 rounded-2xl bg-sky-50/90 border border-sky-200 text-center">
+                  <p class="text-xs font-bold text-sky-950 mb-2">${sc.groupA.name}</p>
+                  <div class="flex justify-center gap-2 flex-wrap">
+                    ${renderGroupObjects("A", sc.groupA, sState.countedA)}
+                  </div>
+                </div>
+
+                <div class="sm:col-span-1 text-center font-display font-bold text-3xl text-orange-600">+</div>
+
+                <div class="sm:col-span-5 p-3 rounded-2xl bg-amber-50/90 border border-amber-200 text-center">
+                  <p class="text-xs font-bold text-amber-950 mb-2">${sc.groupB.name}</p>
+                  <div class="flex justify-center gap-2 flex-wrap">
+                    ${renderGroupObjects("B", sc.groupB, sState.countedB)}
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center pt-1">
+                <button onclick="mergeScenarioObj('${sc.id}')" class="btn-cute btn-green px-7 py-2.5 text-base sm:text-lg">
+                  <span>✨</span> <span>Gabungkan</span>
+                </button>
+                <p class="text-xs text-gray-600 mt-1 font-semibold">
+                  Sentuh objek untuk membilang, kemudian tekan <strong>Gabungkan</strong>.
+                </p>
+              </div>
+            ` : `
+              <!-- Langkah 2: Papar Gabungan & Pilihan Jawapan Aneka Pilihan -->
+              <div class="p-3.5 rounded-2xl bg-emerald-50/90 border-2 border-emerald-300 text-center animate-pop-in">
+                <p class="font-display font-bold text-lg sm:text-xl text-emerald-950 mb-2">
+                  ${sc.groupA.count} + ${sc.groupB.count} = ?
+                </p>
+
+                <div class="flex justify-center gap-2 flex-wrap my-2">
+                  ${Array(sc.groupA.count).fill(sc.groupA.emoji).concat(Array(sc.groupB.count).fill(sc.groupB.emoji)).map((em, idx) => `
+                    <div class="w-11 h-11 rounded-xl bg-white border border-amber-300 flex flex-col items-center justify-center text-xl shadow-sm">
+                      <span>${em}</span>
+                      <span class="text-[10px] font-bold text-gray-600">${idx + 1}</span>
+                    </div>
+                  `).join("")}
+                </div>
+
+                <!-- Pilihan Jawapan Aneka Pilihan -->
+                <div class="flex justify-center gap-3 mt-3">
+                  ${sc.options.map(opt => {
+                    let btnStyle = "btn-soft";
+                    if (sState.selected === opt) {
+                      btnStyle = opt === sc.answer ? "btn-green" : "btn-orange";
+                    }
+                    return `
+                      <button
+                        onclick="answerScenarioObj('${sc.id}', ${opt}, ${sc.answer})"
+                        class="btn-cute ${btnStyle} w-16 h-13 text-xl sm:text-2xl font-bold py-2"
+                      >
+                        ${opt}
+                      </button>
+                    `;
+                  }).join("")}
+                </div>
+
+                <!-- Maklum Balas Mesra -->
+                ${sState.selected !== null ? `
+                  <div class="mt-3 p-2.5 rounded-2xl ${sState.correct ? "bg-emerald-100 text-emerald-900" : "bg-amber-100 text-amber-900"} font-bold text-sm sm:text-base">
+                    ${sState.correct
+                      ? `✅ Betul. Jumlahnya tepat (${sc.groupA.count} + ${sc.groupB.count} = ${total}).`
+                      : `🔄 Belum tepat. Cuba kira sekali lagi.`}
+                  </div>
+                ` : ""}
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function switchScenarioTab(stepNumber, idx) {
+      state.activeScenarioTab[stepNumber] = idx;
+      playPopSound(523.25);
+      renderCurrentStep();
+    }
+
+    function countScenarioObj(scId, groupKey, idx) {
+      const sState = getScenarioState(scId);
+      const arr = groupKey === "A" ? sState.countedA : sState.countedB;
+      if (!arr.includes(idx)) {
+        arr.push(idx);
+        playPopSound(440 + arr.length * 45);
+        speakText(String(arr.length));
+      }
+      renderCurrentStep();
+    }
+
+    function mergeScenarioObj(scId) {
+      const sState = getScenarioState(scId);
+      sState.merged = true;
+      playPopSound(659.25);
+      renderCurrentStep();
+    }
+
+    function answerScenarioObj(scId, chosen, correctAns) {
+      const sState = getScenarioState(scId);
+      sState.selected = chosen;
+      sState.correct = chosen === correctAns;
+      if (sState.correct) {
+        playSuccessChime();
+        speakText("Betul. Jumlahnya tepat.");
+      } else {
+        playPopSound(311.13);
+        speakText("Belum tepat. Cuba kira sekali lagi.");
+      }
+      renderCurrentStep();
+    }
+
+    /* --- LANGKAH 7: RUMUSAN MARKAH (PRA VS POST), REFLEKSI & FRAME TAMBAHAN --- */
+    function calculateTestScore(stepIndex, answersObj) {
+      const testStep = WEBSITE_DATA.steps[stepIndex];
+      let score = 0;
+      testStep.questions.forEach(q => {
+        if (answersObj[q.id] === q.answer) score++;
+      });
+      return { score, total: testStep.questions.length };
+    }
+
+    function renderSummaryStep(step) {
+      const pre = calculateTestScore(1, state.preAnswers);
+      const post = calculateTestScore(5, state.postAnswers);
+      const diff = post.score - pre.score;
+
+      let progressMsg = "Tahniah! Teruskan berlatih konsep tambah setiap hari.";
+      if (diff > 0) {
+        progressMsg = `Hebat! Markah meningkat sebanyak +${diff} mata selepas belajar.`;
+      } else if (post.score === post.total) {
+        progressMsg = "Cemerlang! Anda berjaya menjawab semua soalan dengan tepat.";
+      }
+
+      const reflectionChoices = [
+        { id: "Nota Infografik & Penerokaan", icon: "📊" },
+        { id: "Ilustrasi & Aktiviti Senario", icon: "🏫" },
+        { id: "Panel Bantuan & Garis Nombor", icon: "🧩" }
+      ];
+
+      return `
+        <div class="glass-board p-5 sm:p-7 animate-pop-in space-y-5">
+          <div class="text-center">
+            <span class="text-4xl">🏆</span>
+            <h2 class="font-display font-bold text-2xl sm:text-3xl text-gray-800 mt-1">${step.title}</h2>
+            <p class="instruction-text text-base sm:text-lg font-bold text-emerald-700 mt-1">${step.instruction}</p>
+          </div>
+
+          <!-- Perbandingan Markah Pra-Ujian vs Post-Ujian -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-3xl bg-sky-50 border-2 border-sky-200 text-center">
+              <p class="text-xs font-bold uppercase text-sky-800">Markah Pra-Ujian (Sebelum)</p>
+              <p class="font-display font-bold text-3xl sm:text-4xl text-sky-900 my-1">${pre.score} / ${pre.total}</p>
+              <div class="w-full bg-sky-200 h-3 rounded-full overflow-hidden mt-2">
+                <div class="bg-sky-500 h-full transition-all" style="width: ${(pre.score / pre.total) * 100}%"></div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-3xl bg-emerald-50 border-2 border-emerald-300 text-center">
+              <p class="text-xs font-bold uppercase text-emerald-800">Markah Post-Ujian (Selepas)</p>
+              <p class="font-display font-bold text-3xl sm:text-4xl text-emerald-900 my-1">${post.score} / ${post.total}</p>
+              <div class="w-full bg-emerald-200 h-3 rounded-full overflow-hidden mt-2">
+                <div class="bg-emerald-500 h-full transition-all" style="width: ${(post.score / post.total) * 100}%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-amber-100/90 border border-amber-300 text-center font-bold text-amber-950 text-sm sm:text-base">
+            🌟 ${progressMsg}
+          </div>
+
+          <!-- Refleksi Ringkas Murid -->
+          <div class="p-4 rounded-3xl bg-white/85 border border-gray-200 text-center">
+            <p class="font-display font-bold text-base sm:text-lg text-gray-800 mb-2">
+              Bahagian manakah paling membantu anda faham?
+            </p>
+            <div class="flex flex-wrap justify-center gap-2">
+              ${reflectionChoices.map(r => `
+                <button
+                  onclick="selectReflection('${r.id}')"
+                  class="btn-cute ${state.selectedReflection === r.id ? "btn-green" : "btn-soft"} px-4 py-2 text-xs sm:text-sm"
+                >
+                  <span>${r.icon}</span> <span>${r.id}</span>
+                </button>
+              `).join("")}
+            </div>
+            <p class="text-xs text-gray-600 mt-2.5 font-semibold">
+              💬 Bincangkan jawapan dan cara mengira bersama rakan.
+            </p>
+          </div>
+
+          <!-- Butang Tindakan Eksport Skor & Mula Semula -->
+          <div class="flex flex-wrap justify-center gap-3">
+            <button onclick="exportScoreSummary()" class="btn-cute btn-blue px-5 py-3 text-sm sm:text-base">
+              <span>📋</span> <span>Salin / Muat Turun Ringkasan Skor</span>
+            </button>
+            <button onclick="restartWebsite()" class="btn-cute btn-orange px-6 py-3 text-sm sm:text-base">
+              <span>🔁</span> <span>Mula Semula</span>
+            </button>
+          </div>
+
+          <!-- RUANG EMBED PADLET, BORANG REFLEKSI & BORANG PENILAIAN -->
+          <div class="pt-4 border-t border-gray-200 space-y-4">
+            <p class="font-display font-bold text-base text-gray-800 text-center">
+              Ruang Perkongsian Padlet, Refleksi & Penilaian
+            </p>
+
+            <div class="embed-box">
+              <p class="font-display font-bold text-sm sm:text-base text-gray-800 mb-2">
+                📌 Papan Perkongsian Padlet
+              </p>
+              <div class="iframe-wrap iframe-padlet">
+                <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;height:100%;max-width:100%"><iframe src="https://padlet.com/padlets/s025oxupgq15fucc83w8/embeds/preview_embed" title="Papan Perkongsian Padlet" loading="lazy" style="width:100%;height:100%;display:block;padding:0;margin:0" frameborder="0" allowfullscreen></iframe></div>
+              </div>
+            </div>
+
+            <div class="embed-box">
+              <p class="font-display font-bold text-sm sm:text-base text-gray-800 mb-2">
+                📝 Borang Refleksi (Google Form)
+              </p>
+              <div class="iframe-wrap iframe-form">
+                <iframe
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSeDm-CxIBHhqQWXFsvwBKIoAg566QX-mX9Hi3Z6RuXOK1eBkg/viewform?embedded=true"
+                  title="Borang Refleksi"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <div class="embed-box">
+              <p class="font-display font-bold text-sm sm:text-base text-gray-800 mb-2">
+                ⭐ Borang Penilaian Rakan Pembelajaran (Jotform)
+              </p>
+              <div class="iframe-wrap iframe-jotform">
+                <iframe
+                  id="JotFormIFrame-263251686426058"
+                  src="https://form.jotform.com/263251686426058"
+                  title="Penilaian Rakan Pembelajaran: Kenali Tambah — Sehari Ke Sekolah"
+                  loading="lazy"
+                  allowtransparency="true"
+                  allow="geolocation; microphone; camera; fullscreen; payment"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <!-- Bingkai Bukti Bergambar Kekal Di Bawah -->
+            <div class="grid grid-cols-1 gap-3 pt-1">
+              ${step.extraFrames.filter(f => f.id === "FRAME-GAMBAR").map(f => `
+                <div class="placeholder-frame p-3.5 text-center" data-frame-id="${f.id}" data-asset-type="${f.assetType}">
+                  <span class="inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">
+                    ${f.id}
+                  </span>
+                  <p class="font-display font-bold text-xs sm:text-sm text-gray-800 mt-1">${f.title}</p>
+                  <p class="text-xs font-semibold text-blue-900 mt-0.5">${f.label}</p>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectReflection(choice) {
+      state.selectedReflection = choice;
+      playPopSound(659.25);
+      renderCurrentStep();
+    }
+
+    function exportScoreSummary() {
+      const pre = calculateTestScore(1, state.preAnswers);
+      const post = calculateTestScore(5, state.postAnswers);
+      const summaryText = [
+        "REKOD PENCAPAIAN LAMAN WEB: KENALI TAMBAH (SEHARI KE SEKOLAH)",
+        `Markah Pra-Ujian : ${pre.score} / ${pre.total}`,
+        `Markah Post-Ujian: ${post.score} / ${post.total}`,
+        `Perubahan Skor   : ${post.score - pre.score >= 0 ? "+" : ""}${post.score - pre.score}`,
+        `Refleksi Murid   : ${state.selectedReflection || "Belum dipilih"}`
+      ].join("\n");
+
+      const tempArea = document.createElement("textarea");
+      tempArea.value = summaryText;
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      try {
+        document.execCommand("copy");
+      } catch (e) {}
+      document.body.removeChild(tempArea);
+
+      try {
+        const blob = new Blob([summaryText], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "Rekod_Markah_Kenali_Tambah.txt";
+        link.click();
+        URL.revokeObjectURL(url);
+      } catch (e) {}
+
+      showToast("📋 Ringkasan skor telah disalin dan dimuat turun!");
+      playSuccessChime();
+    }
+
+    function restartWebsite() {
+      state.currentStepIndex = 0;
+      state.preAnswers = {};
+      state.postAnswers = {};
+      state.activeScenarioTab = { 4: 0, 5: 0 };
+      state.explorationMerged = false;
+      state.explorationCountedA = [];
+      state.explorationCountedB = [];
+      state.scenarioState = {};
+      state.selectedReflection = "";
+      playPopSound(523.25);
+      renderCurrentStep();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* =========================================================================
+       7. NAVIGASI ANTARA LANGKAH
+       ========================================================================= */
+    function nextStep() {
+      if (state.currentStepIndex < WEBSITE_DATA.steps.length - 1) {
+        state.currentStepIndex++;
+        playPopSound(587.33);
+        renderCurrentStep();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    function prevStep() {
+      if (state.currentStepIndex > 0) {
+        state.currentStepIndex--;
+        playPopSound(440);
+        renderCurrentStep();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    window.onload = function () {
+      buildNumberLine();
+      renderCurrentStep();
+    };
+  </script>
+
+  <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
+  <script>
+    if (window.jotformEmbedHandler) {
+      window.jotformEmbedHandler("iframe[id='JotFormIFrame-263251686426058']", "https://form.jotform.com/");
+    }
+  </script>
+</body>
+</html>
