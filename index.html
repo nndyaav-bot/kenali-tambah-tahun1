@@ -505,7 +505,7 @@ overflow-y: auto !important;
           title: "Kenali Tambah: Sehari Ke Sekolah",
           instruction: "Jom belajar tambah bersama.",
           hint: "Tekan butang Mula untuk memulakan perjalanan ke sekolah hari ini.",
-          audioUrl: "",
+          audioUrl: "voice01.mp3",
           imageFile: "Morning School Send-Off.png",
           imageAlt: "Budak lelaki bersalaman dengan ibu bapa sebelum ke sekolah pada waktu pagi"
         },
@@ -518,7 +518,7 @@ overflow-y: auto !important;
           title: "Pra-Ujian: Semak Awal",
           instruction: "Jawab tiga soalan awal sebelum kita bermula.",
           hint: "Kira semua objek pada kedua-dua kumpulan, kemudian pilih jumlahnya.",
-          audioUrl: "",
+          audioUrl: "voice02.mp3",
           questions: [
             { id: "pre1", emojiA: "⚽", countA: 2, emojiB: "⚽", countB: 1, labelA: "2 bola", labelB: "1 bola", options: [2, 3, 4], answer: 3 },
             { id: "pre2", emojiA: "🍎", countA: 3, emojiB: "🍎", countB: 2, labelA: "3 epal", labelB: "2 epal", options: [4, 5, 6], answer: 5 },
@@ -533,7 +533,7 @@ overflow-y: auto !important;
           title: "Nota Infografik & Penerokaan Tambah",
           instruction: "Tambah bermaksud menggabungkan dua kumpulan. Klik objek untuk mengira dan tekan Gabungkan.",
           hint: "Baca nota maksud simbol + dan = di atas, kemudian klik buah dan tekan Gabungkan.",
-          audioUrl: "",
+          audioUrl: "voice03.mp3",
           infographicPoints: [
             { badge: "Maksud Tambah", text: "Tambah bermaksud menggabungkan dua kumpulan.", visual: "🍊🍊  dan  🍊" },
             { badge: "Simbol +", text: "Simbol + menunjukkan gabungan.", visual: "2  +  1" },
@@ -551,11 +551,12 @@ overflow-y: auto !important;
           phaseLabel: "Senario 1 – 4",
           title: "Perjalanan Ke Sekolah & Aktiviti Di Sekolah",
           hint: "Perhatikan gambar di atas dahulu, kemudian kira objek, tekan Gabungkan dan pilih jawapan di bawah.",
-          audioUrl: "",
+          audioUrl: "voice04.mp3",
           scenarios: [
             {
               id: "s1",
               number: 1,
+              audioUrl: "voice05.mp3",
               themeClass: "theme-school-path",
               title: "Senario 1: Dalam Perjalanan ke Sekolah",
               imageFile: "1.jpg",
@@ -569,6 +570,7 @@ overflow-y: auto !important;
             {
               id: "s2",
               number: 2,
+              audioUrl: "voice06.mp3",
               themeClass: "theme-classroom",
               title: "Senario 2: Melihat Bilik Darjah",
               imageFile: "2.jpg",
@@ -582,6 +584,7 @@ overflow-y: auto !important;
             {
               id: "s3",
               number: 3,
+              audioUrl: "voice07.mp3",
               themeClass: "theme-classroom",
               title: "Senario 3: Sedang Belajar",
               imageFile: "3.jpg",
@@ -595,6 +598,7 @@ overflow-y: auto !important;
             {
               id: "s4",
               number: 4,
+              audioUrl: "voice08.mp3",
               themeClass: "theme-canteen",
               title: "Senario 4: Sedang Membeli Makanan",
               imageFile: "4.jpg",
@@ -613,11 +617,12 @@ overflow-y: auto !important;
           phaseLabel: "Senario 5 – 7",
           title: "Di Koperasi, Pulang & Berada Di Rumah",
           hint: "Lihat ilustrasi situasi di atas dahulu, kemudian kira, tekan Gabungkan dan pilih jawapan.",
-          audioUrl: "",
+          audioUrl: "voice09.mp3",
           scenarios: [
             {
               id: "s5",
               number: 5,
+              audioUrl: "voice09.mp3",
               themeClass: "theme-cooperative",
               title: "Senario 5: Berada di Koperasi Sekolah (Konsep + 0)",
               imageFile: "5.jpg",
@@ -631,6 +636,7 @@ overflow-y: auto !important;
             {
               id: "s6",
               number: 6,
+              audioUrl: "voice10.mp3",
               themeClass: "theme-afternoon",
               title: "Senario 6: Dalam Perjalanan Pulang ke Rumah",
               imageFile: "6.jpg",
@@ -644,6 +650,7 @@ overflow-y: auto !important;
             {
               id: "s7",
               number: 7,
+              audioUrl: "voice11.mp3",
               themeClass: "theme-home",
               title: "Senario 7: Berada di Rumah",
               imageFile: "7.jpg",
@@ -665,7 +672,7 @@ overflow-y: auto !important;
           title: "Post-Ujian: Semak Kemajuan",
           instruction: "Jawab tiga soalan akhir untuk lihat kemajuan kamu.",
           hint: "Gabungkan kedua-dua kumpulan objek dan pilih jumlah yang tepat.",
-          audioUrl: "",
+          audioUrl: "voice12.mp3",
           questions: [
             { id: "post1", emojiA: "🥤", countA: 2, emojiB: "🥤", countB: 2, labelA: "2 cawan", labelB: "2 cawan", options: [3, 4, 5], answer: 4 },
             { id: "post2", emojiA: "⭐", countA: 4, emojiB: "⭐", countB: 3, labelA: "4 bintang", labelB: "3 bintang", options: [6, 7, 8], answer: 7 },
@@ -680,7 +687,8 @@ overflow-y: auto !important;
           title: "Rekod Markah, Refleksi & Perkongsian",
           instruction: "Aktiviti selesai. Anda telah berlatih konsep tambah.",
           hint: "Salin atau muat turun ringkasan skor untuk rekod pembelajaran anda.",
-          audioUrl: "",
+          audioUrl: "voice13.mp3",
+          closingAudioUrl: "voice14.mp3",
           extraFrames: [
             {
               id: "FRAME-PADLET",
@@ -725,6 +733,52 @@ overflow-y: auto !important;
     /* =========================================================================
        3. AUDIO BACAAN & MUZIK LATAR CERIA
        ========================================================================= */
+    function normalizeMalaySpeech(text) {
+      return String(text || "")
+        .replace(/\+/g, " tambah ")
+        .replace(/=/g, " sama dengan ")
+        .replace(/\b0\b/g, " sifar ")
+        .replace(/\b1\b/g, " satu ")
+        .replace(/\b2\b/g, " dua ")
+        .replace(/\b3\b/g, " tiga ")
+        .replace(/\b4\b/g, " empat ")
+        .replace(/\b5\b/g, " lima ")
+        .replace(/\b6\b/g, " enam ")
+        .replace(/\b7\b/g, " tujuh ")
+        .replace(/\b8\b/g, " lapan ")
+        .replace(/\b9\b/g, " sembilan ")
+        .replace(/\b10\b/g, " sepuluh ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function pickNeutralMaleMalayVoice(voices) {
+      if (!Array.isArray(voices) || voices.length === 0) return null;
+      const malayVoices = voices.filter(v =>
+        v.lang && (v.lang.toLowerCase().startsWith("ms") || v.lang.toLowerCase().startsWith("id"))
+      );
+      const pool = malayVoices.length > 0 ? malayVoices : voices;
+      const maleKeywords = ["male", "lelaki", "rizwan", "osman", "ahmad", "arief", "budi", "putra", "anto", "dimas", "natural", "google"];
+      const femaleKeywords = ["female", "wanita", "yasmin", "nur", "siti", "ayu", "damayanti", "gadis"];
+
+      const scored = pool.map(v => {
+        const nameLower = (v.name || "").toLowerCase();
+        const langLower = (v.lang || "").toLowerCase();
+        let score = 0;
+        if (langLower === "ms-my") score += 25;
+        else if (langLower.startsWith("ms")) score += 20;
+        else if (langLower.startsWith("id")) score += 8;
+
+        if (maleKeywords.some(k => nameLower.includes(k))) score += 18;
+        if (femaleKeywords.some(k => nameLower.includes(k))) score -= 22;
+        if (v.localService) score += 4;
+        return { voice: v, score };
+      });
+
+      scored.sort((a, b) => b.score - a.score);
+      return scored[0] ? scored[0].voice : null;
+    }
+
     function speakText(text) {
       try {
         if (!("speechSynthesis" in window)) {
@@ -732,27 +786,73 @@ overflow-y: auto !important;
           return;
         }
         window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
+        const cleanText = normalizeMalaySpeech(text);
+        if (!cleanText) return;
+
+        const utterance = new SpeechSynthesisUtterance(cleanText);
         const voices = window.speechSynthesis.getVoices();
-        const msVoice = voices.find(v => v.lang && (v.lang.includes("ms") || v.lang.includes("id")));
-        if (msVoice) utterance.voice = msVoice;
-        utterance.lang = "ms-MY";
-        utterance.rate = 0.92;
-        utterance.pitch = 1.06;
+        const selectedVoice = pickNeutralMaleMalayVoice(voices);
+        if (selectedVoice) {
+          utterance.voice = selectedVoice;
+          if (selectedVoice.lang) utterance.lang = selectedVoice.lang;
+        } else {
+          utterance.lang = "ms-MY";
+        }
+        utterance.rate = 0.88;
+        utterance.pitch = 0.86;
+        utterance.volume = 1.0;
         window.speechSynthesis.speak(utterance);
       } catch (e) {}
+    }
+
+    if ("speechSynthesis" in window && typeof window.speechSynthesis.onvoiceschanged !== "undefined") {
+      window.speechSynthesis.onvoiceschanged = function () {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    let currentVoiceAudio = null;
+
+    function stopVoiceAudio() {
+      if (currentVoiceAudio) {
+        try {
+          currentVoiceAudio.pause();
+          currentVoiceAudio.currentTime = 0;
+        } catch (e) {}
+        currentVoiceAudio = null;
+      }
+      if ("speechSynthesis" in window) {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+      }
+    }
+
+    function playVoiceOrFallback(audioUrl, fallbackSpeech) {
+      stopVoiceAudio();
+      if (audioUrl && audioUrl.trim() !== "") {
+        const player = new Audio(audioUrl.trim());
+        currentVoiceAudio = player;
+        player.play().catch(() => {
+          speakText(fallbackSpeech);
+        });
+        return;
+      }
+      speakText(fallbackSpeech);
     }
 
     function speakCurrentStep() {
       const step = WEBSITE_DATA.steps[state.currentStepIndex];
       let speech = `${step.title}. ${step.instruction || ""}`;
+      let voiceFile = step.audioUrl || "";
+
       if (step.type === "scenario_group") {
         const subIdx = state.activeScenarioTab[step.stepNumber] || 0;
         const sc = step.scenarios[subIdx];
         speech = `${sc.title}. ${sc.instruction}`;
+        voiceFile = sc.audioUrl || step.audioUrl || "";
       }
-      speakText(speech);
+
       playPopSound(523.25);
+      playVoiceOrFallback(voiceFile, speech);
     }
 
     function playPopSound(freq = 587.33) {
@@ -1372,6 +1472,11 @@ overflow-y: auto !important;
       state.activeScenarioTab[stepNumber] = idx;
       playPopSound(523.25);
       renderCurrentStep();
+      const step = WEBSITE_DATA.steps.find(s => s.stepNumber === stepNumber);
+      if (step && step.scenarios && step.scenarios[idx]) {
+        const sc = step.scenarios[idx];
+        playVoiceOrFallback(sc.audioUrl || step.audioUrl || "", `${sc.title}. ${sc.instruction}`);
+      }
     }
 
     function countScenarioObj(scId, groupKey, idx) {
@@ -1490,6 +1595,9 @@ overflow-y: auto !important;
             <button onclick="exportScoreSummary()" class="btn-cute btn-blue px-5 py-3 text-sm sm:text-base">
               <span>📋</span> <span>Salin / Muat Turun Ringkasan Skor</span>
             </button>
+            <button onclick="playClosingAudio14()" class="btn-cute btn-green px-5 py-3 text-sm sm:text-base">
+              <span>🎧</span> <span>Audio Penutup (14)</span>
+            </button>
             <button onclick="restartWebsite()" class="btn-cute btn-orange px-6 py-3 text-sm sm:text-base">
               <span>🔁</span> <span>Mula Semula</span>
             </button>
@@ -1551,6 +1659,13 @@ overflow-y: auto !important;
       state.selectedReflection = choice;
       playPopSound(659.25);
       renderCurrentStep();
+    }
+
+    function playClosingAudio14() {
+      const step = WEBSITE_DATA.steps[state.currentStepIndex];
+      const url14 = (step && step.closingAudioUrl) ? step.closingAudioUrl : "voice14.mp3";
+      playPopSound(523.25);
+      playVoiceOrFallback(url14, "Syabas, adik-adik! Kamu telah berjaya menyelesaikan pengembaraan hari ini.");
     }
 
     function exportScoreSummary() {
